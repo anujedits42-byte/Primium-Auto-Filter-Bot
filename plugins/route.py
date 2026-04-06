@@ -4,13 +4,17 @@ import math
 import logging
 import secrets
 import mimetypes
+import pytz  # Added missing import
+from datetime import datetime, timedelta  # Added missing imports
+from pyrogram import enums  # Added missing import for ParseMode
+
+from database.users_chats_db import db
 from aiohttp.http_exceptions import BadStatusLine
 from Jisshu.bot import multi_clients, work_loads
 from Jisshu.server.exceptions import FIleNotFound, InvalidHash
 from Jisshu.util.custom_dl import ByteStreamer
 from Jisshu.util.render_template import render_page
 from info import *
-
 
 routes = web.RouteTableDef()
 
@@ -20,6 +24,87 @@ async def root_route_handler(request):
     return web.json_response("Telegram ~ ProBotXUpdate")
 
 
+@routes.get("/addpremium/{user_id}/{time}")
+async def webhook_add_premium(request):
+    user_id_str = request.match_info.get('user_id')
+    time_str = request.match_info.get('time')
+
+    try:
+        user_id = int(user_id_str)
+        
+        # FIX: Fetch the bot instance before checking if it exists
+        bot = request.app.get('bot')
+        if not bot:
+            return web.Response(text="Bot instance not found in app", status=500)
+        
+        seconds = get_seconds(time_str)
+        if seconds <= 0:
+            return web.Response(text="Invalid time format", status=400)
+
+        IST = pytz.timezone("Asia/Kolkata")
+        now = datetime.now(IST)
+        
+        data = await db.get_user(user_id)
+        
+        if data and data.get("expiry_time"):
+            current_expiry = data.get("expiry_time")
+            
+            # MongoDB timezone fix
+            if current_expiry.tzinfo is None:
+                current_expiry = pytz.utc.localize(current_expiry).astimezone(IST)
+                
+            base_time = max(current_expiry, now)
+            expiry_time = base_time + timedelta(seconds=seconds)
+        else:
+            expiry_time = now + timedelta(seconds=seconds)
+        
+        await db.update_user({"id": user_id, "expiry_time": expiry_time})
+        expiry_str = expiry_time.strftime("%d-%m-%Y %I:%M:%S %p")
+        
+        try:
+            user = await bot.get_users(user_id)
+            msg = (
+                f"🎉 <b>ᴄᴏɴɢʀᴀᴛᴜʟᴀᴛɪᴏɴꜱ!</b> {user.mention},\n"
+                f"<i>ʏᴏᴜ'ᴠᴇ ɢᴏᴛ ᴘʀᴇᴍɪᴜᴍ ᴀᴄᴄᴇꜱꜱ!</i> 💎\n\n"
+                f"⏳ <b>ᴅᴜʀᴀᴛɪᴏɴ:</b> <code>{time_str}</code>\n"
+                f"📅 <b>ᴇxᴘɪʀʏ:</b> <code>{expiry_str}</code>\n\n"
+                f"<i>✨ ᴇɴᴊᴏʏ ʏᴏᴜʀ ᴜʟᴛɪᴍᴀᴛᴇ ᴘʀᴇᴍɪᴜᴍ ʙᴇɴᴇꜰɪᴛꜱ!</i>"
+            )
+            await bot.send_message(user_id, text=msg, parse_mode=enums.ParseMode.HTML)
+            
+            # Assuming LOG_CHANNEL and PREMIUM_LOGS are imported from 'info'
+            if LOG_CHANNEL:
+                log_msg = f"✅ <b>𝐈𝐦𝐝𝐛𝐅𝐢𝐥𝐞𝐬 𝐁𝐨𝐭 ⚝\n\nᴡᴇʙʜᴏᴏᴋ ꜱᴜᴄᴄᴇꜱꜱ:</b> ᴘʀᴇᴍɪᴜᴍ ᴀᴅᴅᴇᴅ ᴛᴏ <code>{user_id}</code> ꜰᴏʀ <code>{time_str}</code>"
+                await bot.send_message(PREMIUM_LOGS, text=log_msg, parse_mode=enums.ParseMode.HTML)
+                
+        except Exception as n_err:
+            logging.error(f"Notification error: {n_err}")
+
+        return web.Response(text=f"Successfully added premium to {user_id} until {expiry_str}", status=200)
+
+    except Exception as e:
+        return web.Response(text=f"Error: {str(e)}", status=500)
+
+
+# --- ⏱️ HELPER FUNCTIONS ---
+
+def get_seconds(time_str):
+    time_units = {
+        'year': 31536000, 'month': 2592000, 'week': 604800,
+        'day': 86400, 'hour': 3600, 'min': 60
+    }
+    for unit, sec in time_units.items():
+        if unit in time_str:
+            try:
+                # Group 1 captures the number, we multiply it by the seconds
+                num = int(re.search(r'(\d+)', time_str).group(1))
+                return num * sec
+            except (AttributeError, ValueError): 
+                # Replaced bare except with specific exceptions
+                continue
+    return -1
+    
+    
 @routes.get(r"/watch/{path:\S+}", allow_head=True)
 async def stream_handler(request: web.Request):
     try:
