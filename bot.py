@@ -88,7 +88,7 @@ async def Jisshu_start():
         chat_id=SUPPORT_GROUP, text=f"<b>{me.mention} ʀᴇsᴛᴀʀᴛᴇᴅ 🤖</b>"
     )
 
-    app = web.AppRunner(await web_server(self))
+    app = web.AppRunner(await web_server(JisshuBot))
     await app.setup()
     bind_address = "0.0.0.0"
     await web.TCPSite(app, bind_address, PORT).start()
