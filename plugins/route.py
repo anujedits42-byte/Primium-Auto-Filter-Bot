@@ -74,8 +74,8 @@ async def webhook_add_premium(request):
             
             # Assuming LOG_CHANNEL and PREMIUM_LOGS are imported from 'info'
             if LOG_CHANNEL:
-                log_msg = f"✅ <b>𝐈𝐦𝐝𝐛𝐅𝐢𝐥𝐞𝐬 𝐁𝐨𝐭 ⚝\n\nᴡᴇʙʜᴏᴏᴋ ꜱᴜᴄᴄᴇꜱꜱ:</b> ᴘʀᴇᴍɪᴜᴍ ᴀᴅᴅᴇᴅ ᴛᴏ <code>{user_id}</code> ꜰᴏʀ <code>{time_str}</code>"
-                await bot.send_message(PREMIUM_LOGS, text=log_msg, parse_mode=enums.ParseMode.HTML)
+                log_msg = f"✅ <b>𝐏𝐫𝐢𝐦𝐢𝐮𝐦 𝐀𝐮𝐭𝐨 𝐅𝐢𝐥𝐭𝐞𝐫 𝐁𝐨𝐭 ⚝\n\nᴡᴇʙʜᴏᴏᴋ ꜱᴜᴄᴄᴇꜱꜱ:</b> ᴘʀᴇᴍɪᴜᴍ ᴀᴅᴅᴇᴅ ᴛᴏ <code>{user_id}</code> ꜰᴏʀ <code>{time_str}</code>"
+                await bot.send_message(LOG_CHANNEL, text=log_msg, parse_mode=enums.ParseMode.HTML)
                 
         except Exception as n_err:
             logging.error(f"Notification error: {n_err}")
