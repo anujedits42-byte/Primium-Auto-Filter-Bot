@@ -20,7 +20,7 @@ SESSION = environ.get("SESSION", "Media_search")
 API_ID = int(environ.get("API_ID", "34446649"))
 API_HASH = environ.get("API_HASH", "8dc570c08d8e35e88fb9bfc73c65d7fa")
 BOT_TOKEN = environ.get("BOT_TOKEN", "8620751527:AAGolJy8SUxrBLNYyXHJZ-Mw5okvrWiA5I8")
-PORT = environ.get("PORT", "8082")
+PORT = int(environ.get("PORT", "5000"))
 
 #IMDB API 
 TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
