@@ -45,7 +45,7 @@ pyrogram.utils.MIN_CHANNEL_ID = -1009147483647
 
 async def Jisshu_start():
     print("\n")
-    print("Credit - Telegram Pro Botz")
+    print("Credit - Telegram @JISSHU_BOTS")
     bot_info = await JisshuBot.get_me()
     JisshuBot.username = bot_info.username
     await initialize_clients()
@@ -87,8 +87,7 @@ async def Jisshu_start():
     await JisshuBot.send_message(
         chat_id=SUPPORT_GROUP, text=f"<b>{me.mention} ʀᴇsᴛᴀʀᴛᴇᴅ 🤖</b>"
     )
-
-    app = web.AppRunner(await web_server(JisshuBot))
+    app = web.AppRunner(await web_server())
     await app.setup()
     bind_address = "0.0.0.0"
     await web.TCPSite(app, bind_address, PORT).start()
