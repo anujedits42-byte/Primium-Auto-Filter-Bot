@@ -17,9 +17,9 @@ def is_enabled(value, default):
 
 # Main
 SESSION = environ.get("SESSION", "Media_search")
-API_ID = int(environ.get("API_ID", ""))
-API_HASH = environ.get("API_HASH", "")
-BOT_TOKEN = environ.get("BOT_TOKEN", "")
+API_ID = int(environ.get("API_ID", "34446649"))
+API_HASH = environ.get("API_HASH", "8dc570c08d8e35e88fb9bfc73c65d7fa")
+BOT_TOKEN = environ.get("BOT_TOKEN", "8620751527:AAGolJy8SUxrBLNYyXHJZ-Mw5okvrWiA5I8")
 PORT = environ.get("PORT", "8082")
 
 #IMDB API 
@@ -28,25 +28,25 @@ TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
 # Owners
 ADMINS = [
     int(admin) if id_pattern.search(admin) else admin
-    for admin in environ.get("ADMINS", "7413682152").split()
+    for admin in environ.get("ADMINS", "7892805795").split()
 ]
 OWNER_USERNAME = environ.get(
-    "OWNER_USERNAME", "Satyajeetkumarofficial"
+    "OWNER_USERNAME", "anujedits76"
 )  # without @ or https://t.me/
-USERNAME = environ.get("USERNAME", "")  # ADMIN USERNAME
+USERNAME = environ.get("USERNAME", "anujedits76")  # ADMIN USERNAME
 
 # Database Channel
 CHANNELS = [
     int(ch) if id_pattern.search(ch) else ch
-    for ch in environ.get("CHANNELS", "").split()
+    for ch in environ.get("CHANNELS", "-1003946078105").split()
 ]
 
 # ForceSub Channel & Log Channels
-AUTH_CHANNEL = int(environ.get("AUTH_CHANNEL", ""))
-AUTH_REQ_CHANNEL = int(environ.get("AUTH_REQ_CHANNEL", ""))
-LOG_CHANNEL = int(environ.get("LOG_CHANNEL", ""))
-LOG_API_CHANNEL = int(environ.get("LOG_API_CHANNEL", ""))
-LOG_VR_CHANNEL = int(environ.get("LOG_VR_CHANNEL", ""))
+AUTH_CHANNEL = int(environ.get("AUTH_CHANNEL", "-1003946078105"))
+AUTH_REQ_CHANNEL = int(environ.get("AUTH_REQ_CHANNEL", "-1003946078105"))
+LOG_CHANNEL = int(environ.get("LOG_CHANNEL", "-1003946078105"))
+LOG_API_CHANNEL = int(environ.get("LOG_API_CHANNEL", "-1003946078105"))
+LOG_VR_CHANNEL = int(environ.get("LOG_VR_CHANNEL", "-1003946078105"))
 
 # MongoDB
 DATABASE_URI = environ.get("DATABASE_URI", "")
@@ -57,26 +57,26 @@ FILES_DATABASE = environ.get("FILES_DATABASE", "")
 COLLECTION_NAME = environ.get("COLLECTION_NAME", "CollectionProBotz")
 
 # Other Channel's
-SUPPORT_GROUP = int(environ.get("SUPPORT_GROUP", "-1002459120948"))
+SUPPORT_GROUP = int(environ.get("SUPPORT_GROUP", "-1003946078105"))
 DELETE_CHANNELS = int(environ.get("DELETE_CHANNELS", "0"))
-request_channel = environ.get("REQUEST_CHANNEL", "-1002459120948")
+request_channel = environ.get("REQUEST_CHANNEL", "-1003946078105")
 REQUEST_CHANNEL = (
     int(request_channel)
     if request_channel and id_pattern.search(request_channel)
     else None
 )
-MOVIE_UPDATE_CHANNEL = int(environ.get("MOVIE_UPDATE_CHANNEL", "-1002269651634"))
+MOVIE_UPDATE_CHANNEL = int(environ.get("MOVIE_UPDATE_CHANNEL", "-1003946078105"))
 
 # Added Link Here Not Id
-SUPPORT_CHAT = environ.get("SUPPORT_CHAT", "https://t.me/MoviesSearchPro")
-MOVIE_GROUP_LINK = environ.get("MOVIE_GROUP_LINK", "https://t.me/MoviesSearchPro")
+SUPPORT_CHAT = environ.get("SUPPORT_CHAT", "https://t.me/anujbychannel")
+MOVIE_GROUP_LINK = environ.get("MOVIE_GROUP_LINK", "https://t.me/anujbychannel")
 
 # Verification
 IS_VERIFY = is_enabled("IS_VERIFY", False)
 # ---------------------------------------------------------------
-TUTORIAL = environ.get("TUTORIAL", "https://t.me/ProBotXUpdate")
-TUTORIAL_2 = environ.get("TUTORIAL_2", "https://t.me/ProBotXUpdate")
-TUTORIAL_3 = environ.get("TUTORIAL_3", "https://t.me/ProBotXUpdate")
+TUTORIAL = environ.get("TUTORIAL", "https://t.me/anujbychannel")
+TUTORIAL_2 = environ.get("TUTORIAL_2", "https://t.me/anujbychannel")
+TUTORIAL_3 = environ.get("TUTORIAL_3", "https://t.me/anujbychannel")
 VERIFY_IMG = environ.get(
     "VERIFY_IMG", "https://graph.org/file/1669ab9af68eaa62c3ca4.jpg"
 )
@@ -85,7 +85,7 @@ SHORTENER_WEBSITE = environ.get("SHORTENER_WEBSITE", "shrinkme.top")
 SHORTENER_API2 = environ.get(
     "SHORTENER_API2", "1a2887e5dc4c4e8134a7b0afd82e8f2cfc0ee2d4"
 )
-SHORTENER_WEBSITE2 = environ.get("SHORTENER_WEBSITE2", "shrinkme.top")
+SHORTENER_WEBSIT2 = environ.get("SHORTENER_WEBSITE2", "shrinkme.top")
 SHORTENER_API3 = environ.get(
     "SHORTENER_API3", "1a2887e5dc4c4e8134a7b0afd82e8f2cfc0ee2d4"
 )
@@ -140,7 +140,7 @@ START_IMG = (
 FORCESUB_IMG = environ.get("FORCESUB_IMG", "https://i.ibb.co/ZNC1Hnb/ad3f2c88a8f2.jpg")
 REFER_PICS = (environ.get("REFER_PICS", "https://envs.sh/PSI.jpg")).split()
 PAYPICS = (
-    environ.get("PAYPICS", "https://i.ibb.co/MktVL566/20250904-173553.jpg")
+    environ.get("PAYPICS", "https://n.uguu.se/YWutWQxO.jpg")
 ).split()
 SUBSCRIPTION = environ.get(
     "SUBSCRIPTION", "https://graph.org/file/242b7f1b52743938d81f1.jpg"
