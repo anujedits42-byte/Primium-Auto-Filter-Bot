@@ -50,11 +50,11 @@ LOG_VR_CHANNEL = int(environ.get("LOG_VR_CHANNEL", "-1003946078105"))
 
 # MongoDB
 DATABASE_URI = environ.get("DATABASE_URI", "mongodb+srv://Anujedit:Anujedit@cluster0.7cs2nhd.mongodb.net/?appName=Cluster0")
-DATABASE_NAME = environ.get("DATABASE_NAME", "anujedit")
+DATABASE_NAME = environ.get("DATABASE_NAME", "Anujedit")
 
 # Files index database url
 FILES_DATABASE = environ.get("FILES_DATABASE", "mongodb+srv://Anujedit:Anujedit@cluster0.7cs2nhd.mongodb.net/?appName=Cluster0")
-COLLECTION_NAME = environ.get("COLLECTION_NAME", "anujedit")
+COLLECTION_NAME = environ.get("COLLECTION_NAME", "Anujedit")
 
 # Other Channel's
 SUPPORT_GROUP = int(environ.get("SUPPORT_GROUP", "-1003946078105"))
